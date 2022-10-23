@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Product;
-use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends BaseController
@@ -17,7 +17,7 @@ class ProductController extends BaseController
      */
     public function index()
     {
-        return "index";
+        // return "index";
         $products = Product::all();
         return $this->sendResponse(ProductResource::collection($products), 'Products retrieved successfully.');
     }
@@ -40,12 +40,12 @@ class ProductController extends BaseController
      */
     public function store(Request $request)
     {
-        return "store";
+        // return "store";
         $input = $request->all();
  
         $validator = Validator::make($input, [
             'name' => 'required',
-            'detail' => 'required'
+            'sku' => 'required'
         ]);
 
         if($validator->fails()){
@@ -92,7 +92,7 @@ class ProductController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         return "update";
         $input = $request->all();
@@ -119,7 +119,7 @@ class ProductController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         return "destroy";
         $product->delete();
