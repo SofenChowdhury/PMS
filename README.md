@@ -23,7 +23,7 @@ cmd: php artisan serve
 {
     'email' => 'admin@admin.com',
     'password' => 'password',
-    'phone' => '01721031244',
+    'phone' => '01719272223',
     'name' => 'Admin'
 }
 ###END###
