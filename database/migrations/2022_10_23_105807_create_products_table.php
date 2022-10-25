@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('sku')->unique();
-            $table->unsignedBigInteger('category_id')->index();
+            $table->unsignedBigInteger('category_id')->index()->default(1);
             $table->double('price')->default(0);
             $table->string('photo')->nullable();
             $table->boolean('status')->default(false);

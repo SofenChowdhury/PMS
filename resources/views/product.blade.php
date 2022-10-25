@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h2 class="my-5 text-center">Products Ajax CRUD</h2>
+            @can('manage products')
             <a class="btn btn-success my-3" href="#" data-bs-toggle="modal" data-bs-target="#addModal"><i class="las la-plus"></i>Add Product</a>
+            @endcan
             <input type="text" name="search" id="search" class="mb-3 form-control" placeholder="Search here...">
             <div class="table-bordered">
                 <table class="table table-striped">
@@ -30,6 +32,7 @@
                             <td>{{$product->price}}</td>
                             {{-- <td>{{$product->status}}</td> --}}
                             <td>
+                                @can('manage products')
                                 <a  href="#"
                                     class="btn btn-primary update_product_form" 
                                     data-bs-toggle="modal" 
@@ -45,6 +48,7 @@
                                     data-id="{{ $product->id }}"
                                 ><i class="las la-times"></i>
                                 </a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
