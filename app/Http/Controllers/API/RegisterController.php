@@ -16,13 +16,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class RegisterController extends BaseController
 {
-    // public function __construct()
-    // {
-    //    $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    // }
     public function register(Request $request)
     {
-        // return $request;
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
@@ -30,27 +25,21 @@ class RegisterController extends BaseController
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
-
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
-
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        // $token = auth('api')->login($user);
-        // $token = rand();
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
-        // return $this->createToken($token,$user);
         return $this->sendResponse($success, 'User register successfully.');
     }
     public function login(Request $request)
     {
-        // return "login";
-        $gmail = "md.rabby.mahmud@gmail.com";
-        $name = "sofen";
-        $phone = "01719272223";
+        // $gmail = "md.rabby.mahmud@gmail.com";
+        // $name = "sofen";
+        // $phone = "01719272223";
         $word = $request->email;
         $qry = User::select('email')->where('email', $word)->orWhere('name', $word)->orWhere('phone', $word)->first();
         if($qry != null){
@@ -66,7 +55,6 @@ class RegisterController extends BaseController
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
     }
-
     public function logout(Request $request)
     {
         DB::table('oauth_access_tokens')
