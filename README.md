@@ -16,7 +16,7 @@ cmd: composer i
 cmd: npm i
 cmd: php artisan migrate
 cmd: php artisan db:seed
-cmd: php artisan pasport:install
+cmd: php artisan passport:install
 cmd: npm run dev
 cmd: php artisan serve
 #Admin Credentials
