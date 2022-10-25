@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\API;
 
 // use Laravel\Passport\Bridge\User;
+use App\Models\User;
+use Laravel\Passport\Token;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\RefreshToken;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 use App\Http\Controllers\API\BaseController as BaseController;
 
 class RegisterController extends BaseController
 {
-    public function __construct()
-    {
-       $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
+    // public function __construct()
+    // {
+    //    $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    // }
     public function register(Request $request)
     {
         // return $request;
@@ -43,6 +47,7 @@ class RegisterController extends BaseController
     }
     public function login(Request $request)
     {
+        // return "login";
         $gmail = "md.rabby.mahmud@gmail.com";
         $name = "sofen";
         $phone = "01719272223";
@@ -53,7 +58,6 @@ class RegisterController extends BaseController
                 $user = Auth::user(); 
                 $success['token'] =  $user->createToken('MyApp')->accessToken; 
                 $success['name'] =  $user->name;
-    
                 return $this->sendResponse($success, 'User login successfully.');
             }else{ 
                 return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
@@ -61,28 +65,14 @@ class RegisterController extends BaseController
         }else{
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
+    }
 
-        // Test if string contains the word 
-        // if((strpos($word, $gmail) !== false) || (strpos($word, $name) !== false) || (strpos($word, $phone) !== false)){
-        //     return "Word Found!";
-        // } else{
-        //     return "Word Not Found!";
-        // }
-        // return $request->email;
-        // if($request->email){
-        //     return "true";
-        // }else{
-        //     return "false";
-        // }
-
-        // if(Auth::attempt(['email' => $qry->email, 'password' => $request->password])){ 
-        //     $user = Auth::user(); 
-        //     $success['token'] =  $user->createToken('MyApp')->accessToken; 
-        //     $success['name'] =  $user->name;
-
-        //     return $this->sendResponse($success, 'User login successfully.');
-        // }else{ 
-        //     return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
-        // } 
+    public function logout(Request $request)
+    {
+        DB::table('oauth_access_tokens')
+            ->whereUserId($request->user()->id)
+            ->delete();
+        $data = $request->user();
+        return response()->json(['status' => true, 'data' => $data, 'message' => 'Successfully logged out']);
     }
 }

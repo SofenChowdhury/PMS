@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\API\RegisterController;
 /*
@@ -19,7 +20,14 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('register', 'App\Http\Controllers\API\RegisterController@register');
-Route::post('login', 'App\Http\Controllers\API\RegisterController@login');
+Route::post('login', 'App\Http\Controllers\API\RegisterController@login')->name('admin.login');
 Route::middleware('auth:api')->group( function () {
     Route::resource('products', 'App\Http\Controllers\API\ProductController');
+    // Route::get('logout', 'App\Http\Controllers\API\RegisterController@logout')->name('admin.logout');
+});
+Route::middleware('auth:api')->get('logout', function (Request $request) {
+    DB::table('oauth_access_tokens')
+        ->whereUserId($request->user()->id)
+        ->delete();
+    return $request->user();
 });
