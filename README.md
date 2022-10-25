@@ -19,11 +19,18 @@ cmd: php artisan db:seed
 cmd: php artisan passport:install
 cmd: npm run dev
 cmd: php artisan serve
-#Admin Credentials
+#Admin Credential Access for CRUD Products
 {
     'email' => 'md.rabby.mahmud@gmail.com',
     'password' => 'password',
     'phone' => '01719272223',
     'name' => 'Admin'
+}
+#User Credential Access ONLY VIEW Products
+{
+    'name' => 'User',
+    'email' => 'user@gmail.com',
+    'password' => 'password',
+    'phone' => '01700718852',
 }
 ###END###
