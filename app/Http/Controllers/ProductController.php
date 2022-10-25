@@ -86,7 +86,7 @@ class ProductController extends Controller
         ->orWhere('sku', 'like', '%'.$request->search_string.'%')
         ->orWhere('price', 'like', '%'.$request->search_string.'%')
         ->orderBy('id', 'DESC')
-        ->paginate(5);
+        ->paginate(10);
         if($products->count() >= 1){
             return view('pagination_products', compact('products'))->render();
         }else{

@@ -8,7 +8,7 @@
             @can('manage products')
             <a class="btn btn-success my-3" href="#" data-bs-toggle="modal" data-bs-target="#addModal"><i class="las la-plus"></i>Add Product</a>
             @endcan
-            <input type="text" name="search" id="search" class="mb-3 form-control" placeholder="Search here...">
+            <input type="text" name="search" id="search" class="mb-3 form-control" placeholder="Search Name SKU Price here...">
             <div class="table-bordered">
                 <table class="table table-striped">
                     <thead>

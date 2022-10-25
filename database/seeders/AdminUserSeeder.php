@@ -22,9 +22,9 @@ class AdminUserSeeder extends Seeder
         $permission->assignRole($adminRole);
  
         $adminUser = User::factory()->create([
-            'email' => 'admin@admin.com',
+            'email' => 'md.rabby.mahmud@gmail.com',
             'password' => bcrypt('password'),
-            'phone' => '01721031244',
+            'phone' => '01719272223',
             'name' => 'Admin'
         ]);
         $adminUser->assignRole('Administrator');

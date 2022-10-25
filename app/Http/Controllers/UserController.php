@@ -37,8 +37,8 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
+        // $name = "Chowdhury Md. Rabby Mahmud";
         // $gmail = "md.rabby.mahmud@gmail.com";
-        // $name = "sofen";
         // $phone = "01719272223";
         $word = $request->email;
         $qry = User::select('email')->where('email', $word)->orWhere('name', $word)->orWhere('phone', $word)->first();
