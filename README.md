@@ -21,7 +21,7 @@ cmd: npm run dev
 cmd: php artisan serve
 #Admin Credentials
 {
-    'email' => 'admin@admin.com',
+    'email' => 'md.rabby.mahmud@gmail.com',
     'password' => 'password',
     'phone' => '01719272223',
     'name' => 'Admin'
